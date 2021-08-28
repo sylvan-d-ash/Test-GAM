@@ -36,7 +36,7 @@ class DisplayAdViewController: UIViewController {
 
     private let adTypeLabel = UILabel()
     private let containerView = UIView()
-    private var bannerView: DFPBannerView!
+    private var bannerView: GAMBannerView!
     private let loadStatusLabel = UILabel()
 
     init(adType: AdType) {
@@ -89,7 +89,7 @@ private extension DisplayAdViewController {
 
     func setupAdView() {
         let size = GADAdSizeFromCGSize(adType.size)
-        bannerView = DFPBannerView(adSize: size)
+        bannerView = GAMBannerView(adSize: size)
         bannerView.adUnitID = adUnitId
         bannerView.rootViewController = self
         bannerView.delegate = self
@@ -102,7 +102,7 @@ private extension DisplayAdViewController {
             containerView.heightAnchor.constraint(equalToConstant: 300),
         ])
 
-        let request = DFPRequest()
+        let request = GAMRequest()
         let extras = GADExtras()
         extras.additionalParameters = params
         request.register(extras)
@@ -122,12 +122,12 @@ private extension DisplayAdViewController {
 }
 
 extension DisplayAdViewController: GADBannerViewDelegate {
-    public func adViewDidReceiveAd(_ bannerView: GADBannerView) {
+    public func bannerViewDidReceiveAd(_ bannerView: GADBannerView) {
         bannerView.isHidden = false
         loadStatusLabel.text = "Ad Status: Loaded"
     }
 
-    public  func adView(_ bannerView: GADBannerView, didFailToReceiveAdWithError error: GADRequestError) {
+    public  func bannerView(_ bannerView: GADBannerView, didFailToReceiveAdWithError error: Error) {
         print("💚❌ error: \(error.localizedDescription)")
         loadStatusLabel.text = "Ad Status: Failed"
     }
