@@ -70,8 +70,14 @@ class BannerAdViewController: UIViewController {
     private let adsize: AdSize = .fluid
     private let loadStatusLabel = UILabel()
     private let containerView = UIView()
+    private lazy var positionPrefixView = UISegmentedControl(items: prefixes)
+    private lazy var positionSuffixView = UISegmentedControl(items: suffixes)
+    private lazy var modeSegmentView = UISegmentedControl(items: modes)
     private var bannerHeight: CGFloat = 0
     private let type: BannerType
+    private let prefixes = ["nat_lar", "bnr_atf"]
+    private let suffixes = ["01", "02", "03", "04"]
+    private let modes = ["light", "dark"]
 
     init(celtraType: BannerType) {
         type = celtraType
@@ -93,18 +99,49 @@ class BannerAdViewController: UIViewController {
 private extension BannerAdViewController {
     func setupSubviews() {
         view.backgroundColor = .white
+        view.addSubview(loadStatusLabel)
+        view.addSubview(containerView)
+
+        if type == .fluid {
+            let prefixLabel = UILabel()
+            prefixLabel.text = "Position prefix"
+            prefixLabel.textColor = .black
+
+            let suffixLabel = UILabel()
+            suffixLabel.text = "Position suffix"
+            suffixLabel.textColor = .black
+
+            let modeLabel = UILabel()
+            modeLabel.text = "Mode"
+            modeLabel.textColor = .black
+
+            [positionPrefixView, positionSuffixView, modeSegmentView].forEach { segment in
+                segment.tintColor = .orange
+                segment.backgroundColor = .systemBlue
+                segment.selectedSegmentTintColor = .systemPink
+                segment.selectedSegmentIndex = 0
+            }
+
+            let stackView = UIStackView(arrangedSubviews: [prefixLabel, positionPrefixView, suffixLabel, positionSuffixView, modeLabel, modeSegmentView])
+            stackView.axis = .vertical
+            view.addSubview(stackView)
+            stackView.translatesAutoresizingMaskIntoConstraints = false
+            NSLayoutConstraint.activate([
+                stackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+                stackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+                stackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            ])
+        }
 
         loadStatusLabel.text = ""
         loadStatusLabel.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(loadStatusLabel)
         NSLayoutConstraint.activate([
             loadStatusLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            loadStatusLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            loadStatusLabel.bottomAnchor.constraint(equalTo: containerView.topAnchor),
         ])
 
         containerView.backgroundColor = .orange
         containerView.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(containerView)
         NSLayoutConstraint.activate([
             containerView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             containerView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
@@ -151,12 +188,26 @@ private extension BannerAdViewController {
     func setupRequest() {
         request = GAMRequest()
 
-        let additionalParams: [String: Any] = [
-            "pos": type.position,
+        var additionalParams: [String: Any] = [
             "tags": type.tags,
             "pg": "main",
             "app": "true",
         ]
+
+        let position: String
+        if type == .fluid {
+            let prefix = prefixes[positionPrefixView.selectedSegmentIndex]
+            let suffix = suffixes[positionSuffixView.selectedSegmentIndex]
+            position = "\(prefix)_\(suffix)_mob"
+
+            additionalParams["mode"] = modes[modeSegmentView.selectedSegmentIndex]
+        } else {
+            position = type.position
+        }
+        additionalParams["pos"] = position
+
+        print(additionalParams)
+
         let extras = GADExtras()
         extras.additionalParameters = additionalParams
         request.register(extras)
