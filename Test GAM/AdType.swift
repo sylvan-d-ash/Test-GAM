@@ -15,6 +15,7 @@ enum AdType: Int {
     case celtra2
     case nativeStyle
     case loadScreen
+    case customNative
 
     var description: String {
         switch self {
@@ -24,6 +25,7 @@ enum AdType: Int {
         case .celtra2: return "Celtra B: Horse Racing"
         case .nativeStyle: return "Google Styled Native"
         case .loadScreen: return "Load Screen Banner Ad"
+        case .customNative: return "Custom Native Ad"
         }
     }
 
@@ -33,6 +35,7 @@ enum AdType: Int {
         case .rectangle: return "d394eaf7019246778d7d03f991de16fd"
         case .celtra1: return "865119d3b09c4875b6d81da8c7873d4b"
         case .celtra2: return "865119d3b09c4875b6d81da8c7873d4b"
+        case .customNative: return "865119d3b09c4875b6d81da8c7873d4b"
         }
     }
 
@@ -40,7 +43,7 @@ enum AdType: Int {
         switch self {
         case .banner: return CGSize(width: 320, height: 50)
         case .rectangle: return CGSize(width: 300, height: 250)
-        case .celtra1, .celtra2, .nativeStyle, .loadScreen: return .zero
+        case .celtra1, .celtra2, .nativeStyle, .loadScreen, .customNative: return .zero
         }
     }
 
@@ -48,7 +51,7 @@ enum AdType: Int {
         switch self {
         case .banner: return "320x50"
         case .rectangle: return "300x250"
-        case .celtra1, .celtra2, .nativeStyle, .loadScreen: return "0x0"
+        case .celtra1, .celtra2, .nativeStyle, .loadScreen, .customNative: return "0x0"
         }
     }
 }
