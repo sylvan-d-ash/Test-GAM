@@ -76,8 +76,11 @@ extension ListViewController: UITableViewDelegate {
             controller = BannerAdViewController(celtraType: .one)
         case .celtra2:
             controller = BannerAdViewController(celtraType: .two)
+        case .nativeStyle:
+            controller = BannerAdViewController(celtraType: .fluid)
+        case .loadScreen:
+            controller = BannerAdViewController(celtraType: .loadScreen)
         }
         navigationController?.pushViewController(controller, animated: true)
     }
 }
-

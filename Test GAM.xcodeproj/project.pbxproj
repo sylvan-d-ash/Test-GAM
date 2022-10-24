@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5E1B4E722695E9A200160122 /* GoogleMobileAds.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E1B4E712695E9A200160122 /* GoogleMobileAds.xcframework */; };
+		5E31CCAD2784DA5600C5F04A /* OMSDK_Bleacherreport.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E31CCAC2784DA5500C5F04A /* OMSDK_Bleacherreport.xcframework */; };
 		5E88A7782562DA4500EE6ADD /* DisplayAdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E88A7772562DA4500EE6ADD /* DisplayAdViewController.swift */; };
 		5E88A77A2564177400EE6ADD /* AdView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E88A7792564177400EE6ADD /* AdView.swift */; };
 		5EADAED32562D72800B53527 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EADAED22562D72800B53527 /* AppDelegate.swift */; };
@@ -16,9 +18,9 @@
 		5EADAEDC2562D72D00B53527 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5EADAEDB2562D72D00B53527 /* Assets.xcassets */; };
 		5EADAEDF2562D72D00B53527 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5EADAEDD2562D72D00B53527 /* LaunchScreen.storyboard */; };
 		5EADAEEA2562D72D00B53527 /* Test_GAMTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EADAEE92562D72D00B53527 /* Test_GAMTests.swift */; };
-		5EADAEF52562D77800B53527 /* GoogleMobileAds.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5EADAEF42562D77800B53527 /* GoogleMobileAds.xcframework */; };
 		5EADAEF72562D82800B53527 /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EADAEF62562D82800B53527 /* ListViewController.swift */; };
 		5EADAEF92562D84700B53527 /* AdType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EADAEF82562D84700B53527 /* AdType.swift */; };
+		5ED2C3A225FB584900636493 /* ads-info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5ED2C3A125FB584900636493 /* ads-info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -32,6 +34,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5E1B4E712695E9A200160122 /* GoogleMobileAds.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = GoogleMobileAds.xcframework; sourceTree = "<group>"; };
+		5E31CCAC2784DA5500C5F04A /* OMSDK_Bleacherreport.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = OMSDK_Bleacherreport.xcframework; sourceTree = "<group>"; };
 		5E88A7772562DA4500EE6ADD /* DisplayAdViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayAdViewController.swift; sourceTree = "<group>"; };
 		5E88A7792564177400EE6ADD /* AdView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdView.swift; sourceTree = "<group>"; };
 		5EADAECF2562D72800B53527 /* Test GAM.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Test GAM.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -45,9 +49,9 @@
 		5EADAEE52562D72D00B53527 /* Test GAMTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Test GAMTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5EADAEE92562D72D00B53527 /* Test_GAMTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test_GAMTests.swift; sourceTree = "<group>"; };
 		5EADAEEB2562D72D00B53527 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		5EADAEF42562D77800B53527 /* GoogleMobileAds.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = GoogleMobileAds.xcframework; sourceTree = "<group>"; };
 		5EADAEF62562D82800B53527 /* ListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
 		5EADAEF82562D84700B53527 /* AdType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdType.swift; sourceTree = "<group>"; };
+		5ED2C3A125FB584900636493 /* ads-info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ads-info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,7 +59,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5EADAEF52562D77800B53527 /* GoogleMobileAds.xcframework in Frameworks */,
+				5E31CCAD2784DA5600C5F04A /* OMSDK_Bleacherreport.xcframework in Frameworks */,
+				5E1B4E722695E9A200160122 /* GoogleMobileAds.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -90,7 +95,8 @@
 		5EADAED12562D72800B53527 /* Test GAM */ = {
 			isa = PBXGroup;
 			children = (
-				5EADAEF42562D77800B53527 /* GoogleMobileAds.xcframework */,
+				5E1B4E712695E9A200160122 /* GoogleMobileAds.xcframework */,
+				5E31CCAC2784DA5500C5F04A /* OMSDK_Bleacherreport.xcframework */,
 				5EADAED22562D72800B53527 /* AppDelegate.swift */,
 				5EADAED42562D72800B53527 /* SceneDelegate.swift */,
 				5EADAEF62562D82800B53527 /* ListViewController.swift */,
@@ -101,6 +107,7 @@
 				5EADAEDB2562D72D00B53527 /* Assets.xcassets */,
 				5EADAEDD2562D72D00B53527 /* LaunchScreen.storyboard */,
 				5EADAEE02562D72D00B53527 /* Info.plist */,
+				5ED2C3A125FB584900636493 /* ads-info.plist */,
 				5E88A7792564177400EE6ADD /* AdView.swift */,
 			);
 			path = "Test GAM";
@@ -197,6 +204,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5EADAEDF2562D72D00B53527 /* LaunchScreen.storyboard in Resources */,
+				5ED2C3A225FB584900636493 /* ads-info.plist in Resources */,
 				5EADAEDC2562D72D00B53527 /* Assets.xcassets in Resources */,
 				5EADAEDA2562D72800B53527 /* Main.storyboard in Resources */,
 			);
@@ -391,6 +399,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.daitensai.Test-GAM";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -409,6 +418,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.daitensai.Test-GAM";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;

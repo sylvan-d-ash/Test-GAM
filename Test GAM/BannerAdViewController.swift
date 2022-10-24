@@ -13,31 +13,74 @@ enum AdSize {
     case fluid, fixed
 }
 
-enum CeltraType {
-    case one
-    case two
+private enum Params {
+    case horse
+    case dodgeball
+
+    var tags: String {
+        switch self {
+        case .horse: return "horse_racing"
+        case .dodgeball: return "dodgeball"
+        }
+    }
+    var adUnitId: String {
+        switch self {
+        case .horse: return "/Horse_racing/Main/Mob/horse_racing"
+        case .dodgeball: return "/National/Main/Mob/dodgeball"
+        }
+    }
 }
 
-class BannerAdViewController: UIViewController {
-    var bannerView: DFPBannerView!
-    var request: DFPRequest!
-    let adsize: AdSize = .fluid
-    let loadStatusLabel = UILabel()
-    let containerView = UIView()
-    var bannerHeight: CGFloat = 0
+enum BannerType {
+    case one
+    case two
+    case fluid
+    case loadScreen
 
-    private let tags: String
-    private let adUnitId: String
-
-    init(celtraType: CeltraType) {
-        switch celtraType {
-        case .one:
-            tags = "dodgeball"
-            adUnitId = "/National/Main/Mob/dodgeball"
-        case .two:
-            tags = "horse_racing"
-            adUnitId = "/National/Main/Mob/horse-racing"
+    var tags: String {
+        switch self {
+        case .one: return "dodgeball"
+        case .two: return "horse_racing"
+        case .fluid: return type.tags
+        case .loadScreen: return "load_screen"
         }
+    }
+    var adUnitId: String {
+        switch self {
+        case .one: return type.adUnitId
+        case .two: return type.adUnitId
+        case .fluid: return type.adUnitId
+        case .loadScreen: return "/Load_Screen"
+        }
+    }
+    var position: String {
+        switch self {
+        case .one, .two: return "nat_lar_05_mob"
+        case .fluid: return "nat_lar_01_mob"
+        case .loadScreen: return "bnr_atf_06_mob"
+        }
+    }
+}
+
+private let type: Params = .horse
+
+class BannerAdViewController: UIViewController {
+    private var bannerView: GAMBannerView!
+    private var request: GAMRequest!
+    private let adsize: AdSize = .fluid
+    private let loadStatusLabel = UILabel()
+    private let containerView = UIView()
+    private lazy var positionPrefixView = UISegmentedControl(items: prefixes)
+    private lazy var positionSuffixView = UISegmentedControl(items: suffixes)
+    private lazy var modeSegmentView = UISegmentedControl(items: modes)
+    private var bannerHeight: CGFloat = 0
+    private let type: BannerType
+    private let prefixes = ["nat_lar", "bnr_atf"]
+    private let suffixes = ["01", "02", "03", "04"]
+    private let modes = ["light", "dark"]
+
+    init(celtraType: BannerType) {
+        type = celtraType
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -56,18 +99,49 @@ class BannerAdViewController: UIViewController {
 private extension BannerAdViewController {
     func setupSubviews() {
         view.backgroundColor = .white
+        view.addSubview(loadStatusLabel)
+        view.addSubview(containerView)
+
+        if type == .fluid {
+            let prefixLabel = UILabel()
+            prefixLabel.text = "Position prefix"
+            prefixLabel.textColor = .black
+
+            let suffixLabel = UILabel()
+            suffixLabel.text = "Position suffix"
+            suffixLabel.textColor = .black
+
+            let modeLabel = UILabel()
+            modeLabel.text = "Mode"
+            modeLabel.textColor = .black
+
+            [positionPrefixView, positionSuffixView, modeSegmentView].forEach { segment in
+                segment.tintColor = .orange
+                segment.backgroundColor = .systemBlue
+                segment.selectedSegmentTintColor = .systemPink
+                segment.selectedSegmentIndex = 0
+            }
+
+            let stackView = UIStackView(arrangedSubviews: [prefixLabel, positionPrefixView, suffixLabel, positionSuffixView, modeLabel, modeSegmentView])
+            stackView.axis = .vertical
+            view.addSubview(stackView)
+            stackView.translatesAutoresizingMaskIntoConstraints = false
+            NSLayoutConstraint.activate([
+                stackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+                stackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+                stackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            ])
+        }
 
         loadStatusLabel.text = ""
         loadStatusLabel.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(loadStatusLabel)
         NSLayoutConstraint.activate([
             loadStatusLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            loadStatusLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            loadStatusLabel.bottomAnchor.constraint(equalTo: containerView.topAnchor),
         ])
 
         containerView.backgroundColor = .orange
         containerView.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(containerView)
         NSLayoutConstraint.activate([
             containerView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             containerView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
@@ -87,8 +161,8 @@ private extension BannerAdViewController {
             size = GADAdSizeFromCGSize(frame.size)
         }
 
-        bannerView = DFPBannerView(adSize: size)
-        bannerView.adUnitID = "/8663477/BR\(adUnitId)"
+        bannerView = GAMBannerView(adSize: size)
+        bannerView.adUnitID = "/8663477/BR\(type.adUnitId)"
         bannerView.rootViewController = self
         bannerView.delegate = self
         bannerView.adSizeDelegate = self
@@ -112,12 +186,28 @@ private extension BannerAdViewController {
     }
 
     func setupRequest() {
-        request = DFPRequest()
+        request = GAMRequest()
 
-        let additionalParams: [String: Any] = [
-            "pos": "nat_lar_05_mob",
-            "tags": tags,
+        var additionalParams: [String: Any] = [
+            "tags": type.tags,
+            "pg": "main",
+            "app": "true",
         ]
+
+        let position: String
+        if type == .fluid {
+            let prefix = prefixes[positionPrefixView.selectedSegmentIndex]
+            let suffix = suffixes[positionSuffixView.selectedSegmentIndex]
+            position = "\(prefix)_\(suffix)_mob"
+
+            additionalParams["mode"] = modes[modeSegmentView.selectedSegmentIndex]
+        } else {
+            position = type.position
+        }
+        additionalParams["pos"] = position
+
+        print(additionalParams)
+
         let extras = GADExtras()
         extras.additionalParameters = additionalParams
         request.register(extras)
@@ -138,12 +228,12 @@ private extension BannerAdViewController {
 }
 
 extension BannerAdViewController: GADBannerViewDelegate {
-    func adViewDidReceiveAd(_ bannerView: GADBannerView) {
+    func bannerViewDidReceiveAd(_ bannerView: GADBannerView) {
         bannerView.isHidden = false
         loadStatusLabel.text = "Ad Status: Loaded"
     }
 
-    func adView(_ bannerView: GADBannerView, didFailToReceiveAdWithError error: GADRequestError) {
+    func bannerView(_ bannerView: GADBannerView, didFailToReceiveAdWithError error: Error) {
         print("💚❌ error: \(error.localizedDescription)")
         loadStatusLabel.text = "Ad Status: Failed"
     }
