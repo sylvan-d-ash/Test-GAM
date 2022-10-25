@@ -22,6 +22,7 @@
 		5EADAEF92562D84700B53527 /* AdType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EADAEF82562D84700B53527 /* AdType.swift */; };
 		5EC0AD9A2906C6F90045D61A /* CustomNativeAdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EC0AD992906C6F90045D61A /* CustomNativeAdViewController.swift */; };
 		5EC0AD9C290801E40045D61A /* OMManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EC0AD9B290801E40045D61A /* OMManager.swift */; };
+		5EC0AD9E290810D30045D61A /* CustomNativeAccordionAdView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EC0AD9D290810D30045D61A /* CustomNativeAccordionAdView.swift */; };
 		5ED2C3A225FB584900636493 /* ads-info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5ED2C3A125FB584900636493 /* ads-info.plist */; };
 /* End PBXBuildFile section */
 
@@ -55,6 +56,7 @@
 		5EADAEF82562D84700B53527 /* AdType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdType.swift; sourceTree = "<group>"; };
 		5EC0AD992906C6F90045D61A /* CustomNativeAdViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNativeAdViewController.swift; sourceTree = "<group>"; };
 		5EC0AD9B290801E40045D61A /* OMManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OMManager.swift; sourceTree = "<group>"; };
+		5EC0AD9D290810D30045D61A /* CustomNativeAccordionAdView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNativeAccordionAdView.swift; sourceTree = "<group>"; };
 		5ED2C3A125FB584900636493 /* ads-info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ads-info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -109,6 +111,7 @@
 				5E88A7772562DA4500EE6ADD /* DisplayAdViewController.swift */,
 				5EADAED82562D72800B53527 /* Main.storyboard */,
 				5EC0AD992906C6F90045D61A /* CustomNativeAdViewController.swift */,
+				5EC0AD9D290810D30045D61A /* CustomNativeAccordionAdView.swift */,
 				5EC0AD9B290801E40045D61A /* OMManager.swift */,
 				5EADAEDB2562D72D00B53527 /* Assets.xcassets */,
 				5EADAEDD2562D72D00B53527 /* LaunchScreen.storyboard */,
@@ -236,6 +239,7 @@
 				5E88A77A2564177400EE6ADD /* AdView.swift in Sources */,
 				5EC0AD9C290801E40045D61A /* OMManager.swift in Sources */,
 				5EADAEF72562D82800B53527 /* ListViewController.swift in Sources */,
+				5EC0AD9E290810D30045D61A /* CustomNativeAccordionAdView.swift in Sources */,
 				5E88A7782562DA4500EE6ADD /* DisplayAdViewController.swift in Sources */,
 				5EADAED52562D72800B53527 /* SceneDelegate.swift in Sources */,
 				5EC0AD9A2906C6F90045D61A /* CustomNativeAdViewController.swift in Sources */,
