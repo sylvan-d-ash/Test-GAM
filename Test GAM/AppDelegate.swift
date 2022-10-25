@@ -30,7 +30,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 extension AppDelegate {
     func initializeOMSDK() {
-        if OMIDBleacherreportSDK.shared.isActive { return }
-        OMIDBleacherreportSDK.shared.activate()
+        OMManager.shared.activateOMSDK()
     }
 }
