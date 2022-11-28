@@ -80,6 +80,8 @@ extension ListViewController: UITableViewDelegate {
             controller = BannerAdViewController(celtraType: .fluid)
         case .loadScreen:
             controller = BannerAdViewController(celtraType: .loadScreen)
+        case .customNative:
+            controller = CustomNativeAdViewController()
         }
         navigationController?.pushViewController(controller, animated: true)
     }

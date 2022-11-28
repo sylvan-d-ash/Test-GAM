@@ -116,7 +116,6 @@ private extension BannerAdViewController {
             modeLabel.textColor = .black
 
             [positionPrefixView, positionSuffixView, modeSegmentView].forEach { segment in
-                segment.tintColor = .orange
                 segment.backgroundColor = .systemBlue
                 segment.selectedSegmentTintColor = .systemPink
                 segment.selectedSegmentIndex = 0
